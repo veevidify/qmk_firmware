@@ -5,9 +5,6 @@
 
 #include QMK_KEYBOARD_H
 
-#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
-#define TAPPING_TERM 200
-
 enum custom_layers {
     _QWERTY,
     _LOWER,
@@ -27,21 +24,21 @@ enum custom_keycodes {
     WORDP, // alt left (previous word)
     WORDN, // alt right (next word)
     LINEB, // cmd left (line begin)
-    LINEE, // cmd right (line end)
+    LINEE  // cmd right (line end)
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
-  //┌────────┬────────┬────────┬──────────────────┬──────────────────┬────────┐                          ┌────────┬──────────────────────────────┬──────────────────────────────┬────────┬────────┬────────┐
-     KC_GRV,  KC_1,    KC_2,    KC_3,              KC_4,              KC_5,                               KC_6,    KC_7,                          KC_8,                          KC_9,    KC_0,    KC_VOLU,
-  //├────────┼────────┼────────┼──────────────────┼──────────────────┼────────┤                          ├────────┼──────────────────────────────┼──────────────────────────────┼────────┼────────┼────────┤
-     KC_TAB,  KC_Q,    KC_W,    KC_E,              KC_R,              KC_T,                               KC_Y,    KC_U,                          KC_I,                          KC_O,    KC_BSLS, KC_VOLD,
-  //├────────┼────────┼────────┼──────────────────┼──────────────────┼────────┤                          ├────────┼──────────────────────────────┼──────────────────────────────┼────────┼────────┼────────┤
-     KC_LALT, KC_A,    KC_S,    MT(MOD_LCTL,KC_D), MT(MOD_LGUI,KC_F), KC_G,                               KC_H,    MT(MOD_LGUI | MOD_RGUI,KC_J),  MT(MOD_LCTL | MOD_RCTL,KC_K),  KC_L,    KC_P,    TO(3),
-  //├────────┼────────┼────────┼──────────────────┼──────────────────┼────────┤                          ├────────┼──────────────────────────────┼──────────────────────────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_Z,    KC_X,    KC_C,              KC_V,              KC_B,    KC_ESC,           KC_BSPC, KC_N,    KC_M,                          KC_COMM,                       KC_DOT,  KC_SLSH, KC_DEL,
-  //└────────┴────────┴────────┴──────────────────┼─┬─────────────┬──┴─────┬──┴─────┬──┘        └───┬────┴───┬────┴───┬──────────────┬───────────┴──────────────────────────────┴────────┴────────┴────────┘
+  //┌────────┬────────┬────────┬──────────────────┬──────────────────┬────────┐                          ┌────────┬───────────────────┬───────────────────┬────────┬────────┬────────┐
+     KC_GRV,  KC_1,    KC_2,    KC_3,              KC_4,              KC_5,                               KC_6,    KC_7,               KC_8,               KC_9,    KC_0,    KC_VOLU,
+  //├────────┼────────┼────────┼──────────────────┼──────────────────┼────────┤                          ├────────┼───────────────────┼───────────────────┼────────┼────────┼────────┤
+     KC_TAB,  KC_Q,    KC_W,    KC_E,              KC_R,              KC_T,                               KC_Y,    KC_U,               KC_I,               KC_O,    KC_BSLS, KC_VOLD,
+  //├────────┼────────┼────────┼──────────────────┼──────────────────┼────────┤                          ├────────┼───────────────────┼───────────────────┼────────┼────────┼────────┤
+     KC_LALT, KC_A,    KC_S,    MT(MOD_LCTL,KC_D), MT(MOD_LGUI,KC_F), KC_G,                               KC_H,    MT(MOD_LGUI,KC_J),  MT(MOD_LCTL,KC_K),  KC_L,    KC_P,    TO(3),
+  //├────────┼────────┼────────┼──────────────────┼──────────────────┼────────┼────────┐        ┌────────┼────────┼───────────────────┼───────────────────┼────────┼────────┼────────┤
+     KC_LSFT, KC_Z,    KC_X,    KC_C,              KC_V,              KC_B,    KC_ESC,           KC_BSPC, KC_N,    KC_M,               KC_COMM,            KC_DOT,  KC_SLSH, KC_DEL,
+  //└────────┴────────┴────────┴──────────────────┴─┬─────────────┬──┴─────┬──┴─────┬──┘        └───┬────┴───┬────┴───┬──────────────┬┴───────────────────┴────────┴────────┴────────┘
                                                      LT(3,KC_ESC), TL_LOWR, KC_SPC,                  KC_ENT,  KC_RSFT, LT(2,KC_BSPC)
                                 //                  └─────────────┴────────┴────────┘               └────────┴────────┴──────────────┘
   ),
@@ -99,6 +96,26 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
             // Do not select the hold action when another key is pressed.
             return false;
     }
+}
+
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case MT(MOD_LCTL, KC_D):
+      // Immediately select the hold action when another key is tapped.
+      return true;
+    case MT(MOD_LGUI, KC_F):
+      // Immediately select the hold action when another key is tapped.
+      return true;
+    case MT(MOD_LGUI, KC_J):
+      // Immediately select the hold action when another key is tapped.
+      return true;
+    case MT(MOD_LCTL, KC_K):
+      // Immediately select the hold action when another key is tapped.
+      return true;
+    default:
+      // Do not select the hold action when another key is tapped.
+      return false;
+  }
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
