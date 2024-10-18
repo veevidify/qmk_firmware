@@ -163,12 +163,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     return false;
     case WORDP: // alt left (previous word)
       if (record->event.pressed) {
-        SEND_STRING(SS_LALT(SS_TAP(X_LEFT)));
+        SEND_STRING(SS_LOPT(SS_TAP(X_LEFT)));
       }
     return false;
     case WORDN: // alt right (next word)
       if (record->event.pressed) {
-        SEND_STRING(SS_LALT(SS_TAP(X_RGHT)));
+        SEND_STRING(SS_LOPT(SS_TAP(X_RGHT)));
       }
     return false;
     case LINEB: // cmd left (line begin)
