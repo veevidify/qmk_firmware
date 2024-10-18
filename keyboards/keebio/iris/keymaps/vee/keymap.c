@@ -84,3 +84,35 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 #   endif
 };
 #endif
+
+// tap hold decision mode for hold lt (2/backspace) - accept interrupt
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case LT(2, KC_BSPC):
+      // Immediately select the hold action when another key is pressed.
+      return true;
+    default:
+      // Do not select the hold action when another key is pressed.
+      return false;
+  }
+}
+
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case MT(MOD_LCTL, KC_D):
+      // Immediately select the hold action when another key is tapped.
+      return true;
+    case MT(MOD_LGUI, KC_F):
+      // Immediately select the hold action when another key is tapped.
+      return true;
+    case MT(MOD_LGUI, KC_J):
+      // Immediately select the hold action when another key is tapped.
+      return true;
+    case MT(MOD_LCTL, KC_K):
+      // Immediately select the hold action when another key is tapped.
+      return true;
+    default:
+      // Do not select the hold action when another key is tapped.
+      return false;
+  }
+}
