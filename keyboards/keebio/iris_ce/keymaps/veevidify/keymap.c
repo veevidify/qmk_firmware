@@ -13,18 +13,19 @@ enum custom_layers {
 };
 
 enum custom_keycodes {
-    ALTW,  // switch app
-    SCRSH, // macos screen shot (draw)
-    ZOOMI, // cmd + (zoom in)
-    ZOOMO, // cmd - (zoom out)
-    FULLS, // full screen (rect)
-    LSNAP, // snap left 2/3 (rect)
-    LHSNP, // left half snap (rect)
-    LCSNP, // left corner snap (rect)
-    WORDP, // alt left (previous word)
-    WORDN, // alt right (next word)
-    LINEB, // cmd left (line begin)
-    LINEE  // cmd right (line end)
+  // starting the seq from a safe range
+  ALTW = SAFE_RANGE,  // switch app
+  SCRSH, // macos screen shot (draw)
+  ZOOMI, // cmd + (zoom in)
+  ZOOMO, // cmd - (zoom out)
+  FULLS, // full screen (rect)
+  LSNAP, // snap left 2/3 (rect)
+  LHSNP, // left half snap (rect)
+  LCSNP, // left corner snap (rect)
+  WORDP, // alt left (previous word)
+  WORDN, // alt right (next word)
+  LINEB, // cmd left (line begin)
+  LINEE  // cmd right (line end)
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
