@@ -38,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼──────────────────┼──────────────────┼────────┤                          ├────────┼───────────────────┼───────────────────┼────────┼────────┼────────┤
      KC_LALT, KC_A,    KC_S,    MT(MOD_LCTL,KC_D), MT(MOD_LGUI,KC_F), KC_G,                               KC_H,    MT(MOD_LGUI,KC_J),  MT(MOD_LCTL,KC_K),  KC_L,    KC_P,    TO(3),
   //├────────┼────────┼────────┼──────────────────┼──────────────────┼────────┼────────┐        ┌────────┼────────┼───────────────────┼───────────────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_Z,    KC_X,    KC_C,              KC_V,              KC_B,    KC_ESC,           KC_BSPC, KC_N,    KC_M,               KC_COMM,            KC_DOT,  KC_SLSH, KC_DEL,
+     KC_LSFT, KC_Z,    KC_X,    KC_C,              KC_V,              KC_B,    KC_ESC,           KC_BSPC, KC_N,    KC_M,               KC_COMM,            KC_DOT,  KC_SLSH, TO(2),
   //└────────┴────────┴────────┴──────────────────┴─┬─────────────┬──┴─────┬──┴─────┬──┘        └───┬────┴───┬────┴───┬──────────────┬┴───────────────────┴────────┴────────┴────────┘
                                                      LT(3,KC_ESC), TL_LOWR, KC_SPC,                  KC_ENT,  KC_RSFT, LT(2,KC_BSPC)
                                 //                  └─────────────┴────────┴────────┘               └────────┴────────┴──────────────┘
@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, MS_BTN3, LCSNP,            LHSNP,   _______, _______, KC_HOME, KC_END,  KC_PGDN, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    MS_BTN2, _______, MS_BTN1,                   _______, _______, _______
+                                    MS_BTN2, TO(0),   MS_BTN1,                   _______, TO(0),   _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -82,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    TO(0),   TO(0),   _______,                   _______, _______, _______
+                                    TO(0),   TO(0),   _______,                   _______, TO(0),   _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   )
 };
@@ -91,6 +91,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case LT(2, KC_BSPC):
+      // Immediately select the hold action when another key is pressed.
+      return true;
+    case LT(2, KC_DEL):
       // Immediately select the hold action when another key is pressed.
       return true;
     default:
@@ -125,62 +128,62 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
       if (record->event.pressed) {
         SEND_STRING(SS_LALT(SS_TAP(X_W))); // alt W
       }
-    return false;
+      return false;
     case SCRSH: // macos screen shot (draw)
       if (record->event.pressed) {
         SEND_STRING(SS_LGUI(SS_LSFT(SS_TAP(X_4))));
       }
-    return false;
+      return false;
     case ZOOMI: // cmd + (zoom in)
       if (record->event.pressed) {
         SEND_STRING(SS_LGUI(SS_TAP(X_MINS)));
       }
-    return false;
+      return false;
     case ZOOMO: // cmd - (zoom out)
       if (record->event.pressed) {
         SEND_STRING(SS_LGUI(SS_TAP(X_EQL)));
       }
-    return false;
+      return false;
     case FULLS: // full screen (rect)
       if (record->event.pressed) {
         SEND_STRING(SS_LALT(SS_LGUI(SS_TAP(X_F))));
       }
-    return false;
+      return false;
     case LSNAP: // snap left 2/3 (rect)
       if (record->event.pressed) {
         SEND_STRING(SS_LALT(SS_LGUI(SS_LSFT(SS_TAP(X_LEFT)))));
       }
-    return false;
+      return false;
     case LHSNP: // left half snap (rect)
       if (record->event.pressed) {
         SEND_STRING(SS_LALT(SS_LGUI(SS_TAP(X_LEFT))));
       }
-    return false;
+      return false;
     case LCSNP: // left corner snap (rect)
       if (record->event.pressed) {
         SEND_STRING(SS_LALT(SS_LCTL(SS_TAP(X_LEFT))));
       }
-    return false;
+      return false;
     case WORDP: // alt left (previous word)
       if (record->event.pressed) {
         SEND_STRING(SS_LOPT(SS_TAP(X_LEFT)));
       }
-    return false;
+      return false;
     case WORDN: // alt right (next word)
       if (record->event.pressed) {
         SEND_STRING(SS_LOPT(SS_TAP(X_RGHT)));
       }
-    return false;
+      return false;
     case LINEB: // cmd left (line begin)
       if (record->event.pressed) {
         SEND_STRING(SS_LGUI(SS_TAP(X_LEFT)));
       }
-    return false;
+      return false;
     case LINEE: // cmd right (line end)
       if (record->event.pressed) {
         SEND_STRING(SS_LGUI(SS_TAP(X_RGHT)));
       }
-    return false;
+      return false;
   }
   return true;
 }
