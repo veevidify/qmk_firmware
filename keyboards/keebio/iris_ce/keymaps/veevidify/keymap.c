@@ -20,8 +20,11 @@ enum custom_keycodes {
   ZOOMO, // cmd - (zoom out)
   FULLS, // full screen (rect)
   LSNAP, // snap left 2/3 (rect)
+  RSNAP, // snap right 2/3 (rect)
   LHSNP, // left half snap (rect)
+  RHSNP, // right half snap (rect)
   LCSNP, // left corner snap (rect)
+  RCSNP, // right corner snap (rect)
   WORDP, // alt left (previous word)
   WORDN, // alt right (next word)
   LINEB, // cmd left (line begin)
@@ -52,9 +55,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      SCRSH,   _______, _______, KC_PIPE, KC_MINS, KC_COLN,                            KC_EQL,  KC_SCLN, KC_LBRC, KC_RBRC, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     BL_TOGG, _______, _______, _______, KC_UNDS, KC_BSPC, LSNAP,            FULLS,   _______, KC_TILD, KC_LT,   KC_GT,   KC_SLSH, _______,
+     BL_TOGG, _______, _______, _______, KC_UNDS, KC_BSPC, FULLS,            RSNAP,   _______, KC_TILD, KC_LT,   KC_GT,   KC_SLSH, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, _______, _______,                   _______, _______, _______
+                                    _______, _______, _______,                   _______, _______, KC_DEL
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -66,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, _______, MS_LEFT, MS_DOWN, MS_RGHT, MS_WHLD,                            KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_PGUP, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, MS_BTN3, LCSNP,            LHSNP,   _______, _______, KC_HOME, KC_END,  KC_PGDN, _______,
+     _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, MS_BTN3, LHSNP,            RHSNP,   _______, _______, KC_HOME, KC_END,  KC_PGDN, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     MS_BTN2, TO(0),   MS_BTN1,                   _______, TO(0),   _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -80,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
+     _______, _______, _______, _______, _______, _______, LCSNP,            RCSNP,   _______, _______, _______, _______, _______, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     TO(0),   TO(0),   _______,                   _______, TO(0),   _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -136,12 +139,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
       return false;
     case ZOOMI: // cmd + (zoom in)
       if (record->event.pressed) {
-        SEND_STRING(SS_LGUI(SS_TAP(X_MINS)));
+        SEND_STRING(SS_LGUI(SS_TAP(X_EQL)));
       }
       return false;
     case ZOOMO: // cmd - (zoom out)
       if (record->event.pressed) {
-        SEND_STRING(SS_LGUI(SS_TAP(X_EQL)));
+        SEND_STRING(SS_LGUI(SS_TAP(X_MINS)));
       }
       return false;
     case FULLS: // full screen (rect)
@@ -154,14 +157,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
         SEND_STRING(SS_LALT(SS_LGUI(SS_LSFT(SS_TAP(X_LEFT)))));
       }
       return false;
+    case RSNAP: // snap right 2/3 (rect)
+      if (record->event.pressed) {
+        SEND_STRING(SS_LALT(SS_LGUI(SS_LSFT(SS_TAP(X_RGHT)))));
+      }
+      return false;
     case LHSNP: // left half snap (rect)
       if (record->event.pressed) {
         SEND_STRING(SS_LALT(SS_LGUI(SS_TAP(X_LEFT))));
       }
       return false;
+    case RHSNP: // right half snap (rect)
+      if (record->event.pressed) {
+        SEND_STRING(SS_LALT(SS_LGUI(SS_TAP(X_RGHT))));
+      }
+      return false;
     case LCSNP: // left corner snap (rect)
       if (record->event.pressed) {
         SEND_STRING(SS_LALT(SS_LCTL(SS_TAP(X_LEFT))));
+      }
+      return false;
+    case RCSNP: // right corner snap (rect)
+      if (record->event.pressed) {
+        SEND_STRING(SS_LALT(SS_LCTL(SS_TAP(X_RGHT))));
       }
       return false;
     case WORDP: // alt left (previous word)
