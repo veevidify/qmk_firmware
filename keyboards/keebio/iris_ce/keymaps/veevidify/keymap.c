@@ -1,6 +1,3 @@
-// Copyright 2023 Danny Nguyen (@nooges)
-// SPDX-License-Identifier: GPL-2.0-or-later
-
 // qmk compile -kb keebio/iris_ce/rev1 -km veevidify
 
 #include QMK_KEYBOARD_H
