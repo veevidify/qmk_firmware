@@ -4,6 +4,18 @@
 #define PERMISSIVE_HOLD_PER_KEY
 #define TAPPING_TERM 200
 
-#define RGBLIGHT_HUE_STEP 252
-#define RGBLIGHT_SAT_STEP 55
-#define RGBLIGHT_VAL_STEP 50
+#define RGB_MATRIX_DEFAULT_ON true
+
+ // Sets the default hue value, if none has been set
+#define RGB_MATRIX_DEFAULT_HUE 252
+
+ // Sets the default saturation value, if none has been set
+#define RGB_MATRIX_DEFAULT_SAT 55
+
+ // Sets the default brightness value, if none has been set
+#define RGB_MATRIX_DEFAULT_VAL RGB_MATRIX_MAXIMUM_BRIGHTNESS
+
+#define SPLIT_LAYER_STATE_ENABLE
+#define SPLIT_LED_STATE_ENABLE
+#define RGBLIGHT_SPLIT
+#define SPLIT_MODS_ENABLE

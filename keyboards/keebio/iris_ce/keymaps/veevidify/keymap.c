@@ -9,6 +9,7 @@ enum custom_layers {
     _LAYER3
 };
 
+// macros as custom keycodes
 enum custom_keycodes {
   // starting the seq from a safe range
   ALTW = SAFE_RANGE,  // switch app
@@ -80,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, UG_PREV, UG_TOGG, UG_NEXT, UG_VALD, UG_VALU, LCSNP,            RCSNP,   _______, _______, _______, _______, _______, _______,
+     _______, RGB_RMOD,RGB_TOG, RGB_MOD, RGB_VAD, RGB_VAI, LCSNP,            RCSNP,   _______, _______, _______, _______, _______, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     TO(0),   TO(0),   _______,                   _______, TO(0),   _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -102,6 +103,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
+// permissive hold for mod tap
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case MT(MOD_LCTL, KC_D):
@@ -122,6 +124,7 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
+// macros
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   switch (keycode) {
     case ALTW: // switch app
@@ -201,4 +204,59 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
       return false;
   }
   return true;
+}
+
+// layer-based rgb
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+  HSV l0 = {252, 55,  50}; // default layer - purple-ish
+  HSV l1 = {120, 100, 100}; // green
+  HSV l2 = {240, 100, 100}; // blue
+  HSV l3 = {40,  100, 100}; // orange
+
+  if (get_highest_layer(layer_state) > 0) {
+    uint8_t layer = get_highest_layer(layer_state);
+
+    // check which key has keymap defined and has associated led
+    for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
+      for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
+        uint8_t index = g_led_config.matrix_co[row][col];
+
+        if (
+          index >= led_min && index < led_max && index != NO_LED &&
+          keymap_key_to_keycode(layer, (keypos_t){col,row}) > KC_TRNS
+        ) {
+          HSV hsv = l0;
+          switch (layer) {
+            case 1:
+              hsv = l1;
+              break;
+            case 2:
+              hsv = l2;
+              break;
+            case 3:
+              hsv = l3;
+              break;
+            default:
+              break;
+          }
+          if (hsv.v > rgb_matrix_get_val()) {
+            hsv.v = rgb_matrix_get_val() + 50; // force brighter - not sure if ok
+          }
+          RGB rgb = hsv_to_rgb(hsv);
+          rgb_matrix_set_color(index, rgb.r, rgb.g, rgb.b);
+        }
+      }
+    }
+  } else { // default layer just display all
+    for (uint8_t i = led_min; i < led_max; i++) {
+      if (l0.v > rgb_matrix_get_val()) {
+        l0.v = rgb_matrix_get_val(); // force brighter - not sure if ok
+      }
+      RGB r0 = hsv_to_rgb(l0);
+      if (HAS_FLAGS(g_led_config.flags[i], 0x01)) { // 0x01 == LED_FLAG_MODIFIER
+        rgb_matrix_set_color(i, r0.r, r0.g, r0.b);
+      }
+    }
+  }
+  return false;
 }
