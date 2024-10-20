@@ -39,9 +39,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼──────────────────┼──────────────────┼────────┤                          ├────────┼───────────────────┼───────────────────┼────────┼────────┼────────┤
      KC_LALT, KC_A,    KC_S,    MT(MOD_LCTL,KC_D), MT(MOD_LGUI,KC_F), KC_G,                               KC_H,    MT(MOD_LGUI,KC_J),  MT(MOD_LCTL,KC_K),  KC_L,    KC_P,    TO(3),
   //├────────┼────────┼────────┼──────────────────┼──────────────────┼────────┼────────┐        ┌────────┼────────┼───────────────────┼───────────────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_Z,    KC_X,    KC_C,              KC_V,              KC_B,    KC_ESC,           KC_BSPC, KC_N,    KC_M,               KC_COMM,            KC_DOT,  KC_SLSH, TO(2),
+     KC_LSFT, KC_Z,    KC_X,    KC_C,              KC_V,              KC_B,    KC_ESC,           KC_BSPC, KC_N,    KC_M,               KC_COMM,            KC_DOT,  KC_SLSH, KC_DEL,
   //└────────┴────────┴────────┴──────────────────┴─┬─────────────┬──┴─────┬──┴─────┬──┘        └───┬────┴───┬────┴───┬──────────────┬┴───────────────────┴────────┴────────┴────────┘
-                                                     LT(3,KC_ESC), TL_LOWR, KC_SPC,                  KC_ENT,  KC_RSFT, LT(2,KC_BSPC)
+                                                     LT(2,KC_ESC), TL_LOWR, KC_SPC,                  KC_ENT,  KC_RSFT, LT(2,KC_BSPC)
                                 //                  └─────────────┴────────┴────────┘               └────────┴────────┴──────────────┘
   ),
 
@@ -55,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, _______, _______, _______, KC_UNDS, KC_BSPC, FULLS,            RSNAP,   _______, KC_TILD, KC_LT,   KC_GT,   KC_SLSH, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, _______, _______,                   _______, _______, KC_DEL
+                                    _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -95,6 +95,9 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
       // Immediately select the hold action when another key is pressed.
       return true;
     case LT(2, KC_DEL):
+      // Immediately select the hold action when another key is pressed.
+      return true;
+    case LT(2,KC_ESC):
       // Immediately select the hold action when another key is pressed.
       return true;
     default:
@@ -236,7 +239,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
               break;
           }
           if (hsv.v > rgb_matrix_get_val()) {
-            hsv.v = rgb_matrix_get_val() + 50; // force brighter - not sure if ok
+            hsv.v = rgb_matrix_get_val() + 25; // force brighter - not sure if ok
           }
           RGB rgb = hsv_to_rgb(hsv);
           rgb_matrix_set_color(index, rgb.r, rgb.g, rgb.b);
