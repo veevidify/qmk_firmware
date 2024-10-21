@@ -213,8 +213,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
   HSV l0 = {252, 55,  50}; // default layer - purple-ish
   HSV l1 = {240, 100, 100}; // blue
-  HSV l2 = {120, 100, 100}; // green
-  HSV l3 = {40,  100, 100}; // orange
+  HSV l2 = {40,  100, 100}; // orange
+  HSV l3 = {120, 100, 100}; // green
 
   if (get_highest_layer(layer_state) > 0) {
     uint8_t layer = get_highest_layer(layer_state);
