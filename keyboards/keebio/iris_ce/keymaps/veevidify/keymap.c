@@ -212,10 +212,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 // layer-based rgb
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
   HSV l0 = {252, 55,  50}; // default layer - purple-ish
-  HSV l2 = {240, 100, 100}; // blue
+  HSV l1 = {240, 100, 100}; // blue
+  HSV l2 = {120, 100, 100}; // green
   HSV l3 = {40,  100, 100}; // orange
 
-  if (get_highest_layer(layer_state) > 1) {
+  if (get_highest_layer(layer_state) > 0) {
     uint8_t layer = get_highest_layer(layer_state);
 
     // check which key has keymap defined and has associated led
@@ -229,17 +230,20 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         ) {
           HSV hsv = l0;
           switch (layer) {
+            case 1:
+              hsv = l1;
+              hsv.v = rgb_matrix_get_val() + 20; // force brighter - not sure if ok
+              break;
             case 2:
               hsv = l2;
+              hsv.v = rgb_matrix_get_val() + 20; // force brighter - not sure if ok
               break;
             case 3:
               hsv = l3;
+              hsv.v = rgb_matrix_get_val() + 50; // force brighter - not sure if ok
               break;
             default:
               break;
-          }
-          if (hsv.v > rgb_matrix_get_val()) {
-            hsv.v = rgb_matrix_get_val() + 25; // force brighter - not sure if ok
           }
           RGB rgb = hsv_to_rgb(hsv);
           rgb_matrix_set_color(index, rgb.r, rgb.g, rgb.b);
