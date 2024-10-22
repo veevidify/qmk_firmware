@@ -99,7 +99,13 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     case MT(MOD_LCTL, KC_D):
       // Immediately select the hold action when another key is tapped.
       return true;
+    case MT(MOD_LALT, KC_F):
+      // Immediately select the hold action when another key is tapped.
+      return true;
     case MT(MOD_LGUI, KC_F):
+      // Immediately select the hold action when another key is tapped.
+      return true;
+    case MT(MOD_LALT, KC_J):
       // Immediately select the hold action when another key is tapped.
       return true;
     case MT(MOD_LGUI, KC_J):
