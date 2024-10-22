@@ -123,14 +123,14 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     // Immediately select the hold action when another key is tapped.
-    // case LCTL_T(KC_D):
-    //   return true;
+    case LCTL_T(KC_D):
+      return true;
     case LGUI_T(KC_F):
       return true;
     case LGUI_T(KC_J):
       return true;
-    // case LCTL_T(KC_K):
-    //   return true;
+    case LCTL_T(KC_K):
+      return true;
 
     // Do not select the hold action when another key is tapped.
     default:
