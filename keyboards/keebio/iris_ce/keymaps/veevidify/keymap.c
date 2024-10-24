@@ -50,9 +50,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                    ┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
                          KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                            KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, ZOOMI,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-                         ALTW,    _______, _______, _______, KC_DQUO, KC_QUOT,                            KC_QUES, KC_PPLS, KC_LBRC, KC_RBRC, _______, ZOOMO,
+                         ALTW,    _______, _______, _______, KC_DQUO, KC_QUOT,                            KC_QUES, KC_PPLS, KC_LCBR, KC_RCBR, _______, ZOOMO,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-                         SCRSH,   _______, _______, KC_PIPE, KC_MINS, KC_COLN,                            KC_EQL,  KC_SCLN, KC_LCBR, KC_RCBR, _______, _______,
+                         SCRSH,   _______, _______, KC_PIPE, KC_MINS, KC_COLN,                            KC_EQL,  KC_SCLN, KC_LBRC, KC_RBRC, _______, _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
                          _______, _______, _______, _______, KC_UNDS, KC_DEL,  FULLS,            RSNAP,   KC_BSPC, KC_TILD, KC_LT,   KC_GT,   KC_SLSH, _______,
   //                    └────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
                          _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-                         _______, RGB_RMOD,RGB_TOG, RGB_MOD, RGB_VAD, RGB_VAI, _______,          _______, _______, _______, _______, _______, _______, _______,
+                         _______, _______, _______, RGB_TOG, RGB_VAD, RGB_VAI, _______,          _______, _______, _______, _______, _______, _______, _______,
   //                    └────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                                         TO(0),   TO(0),   _______,                   _______, TO(0),   _______
                                                     // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -241,19 +241,19 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
           switch (layer) {
             case 1:
               hsv = l1;
-              hsv.v = rgb_matrix_get_val() + 20; // force brighter - not sure if ok
+              hsv.v = rgb_matrix_get_val() + 25; // force brighter - not sure if ok
               break;
             case 2:
               hsv = l2;
-              hsv.v = rgb_matrix_get_val() + 35; // force brighter - not sure if ok
+              hsv.v = rgb_matrix_get_val() + 50; // force brighter - not sure if ok
               break;
             case 3:
               hsv = l3;
-              hsv.v = rgb_matrix_get_val() + 35; // force brighter - not sure if ok
+              hsv.v = rgb_matrix_get_val() + 50; // force brighter - not sure if ok
               break;
             case 4:
               hsv = l4;
-              hsv.v = rgb_matrix_get_val() + 50; // force brighter - not sure if ok
+              hsv.v = rgb_matrix_get_val() + 70; // force brighter - not sure if ok
               break;
             default:
               break;
