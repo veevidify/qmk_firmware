@@ -228,18 +228,15 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
   HSV l3 = {40,  100, 100}; // orange
   HSV l4 = {120, 100, 100}; // green
 
-  if (get_highest_layer(layer_state) > 0) {
+  if (get_highest_layer(layer_state) > 0) { // a layer is active
     uint8_t layer = get_highest_layer(layer_state);
 
-    // check which key has keymap defined and has associated led
     for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
       for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
         uint8_t index = g_led_config.matrix_co[row][col];
 
-        if (
-          index >= led_min && index < led_max && index != NO_LED &&
-          keymap_key_to_keycode(layer, (keypos_t){col,row}) > KC_TRNS
-        ) {
+        // key has led associated
+        if (index >= led_min && index < led_max && index != NO_LED) {
           HSV hsv = l0;
           switch (layer) {
             case 1:
@@ -248,11 +245,11 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
               break;
             case 2:
               hsv = l2;
-              hsv.v = rgb_matrix_get_val() + 20; // force brighter - not sure if ok
+              hsv.v = rgb_matrix_get_val() + 35; // force brighter - not sure if ok
               break;
             case 3:
               hsv = l3;
-              hsv.v = rgb_matrix_get_val() + 20; // force brighter - not sure if ok
+              hsv.v = rgb_matrix_get_val() + 35; // force brighter - not sure if ok
               break;
             case 4:
               hsv = l4;
@@ -260,6 +257,10 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
               break;
             default:
               break;
+          }
+          // however if a key is not mapped on this layer, turn it off
+          if (keymap_key_to_keycode(layer, (keypos_t){col,row}) <= KC_TRNS) {
+            hsv.v = 0;
           }
           RGB rgb = hsv_to_rgb(hsv);
           rgb_matrix_set_color(index, rgb.r, rgb.g, rgb.b);
