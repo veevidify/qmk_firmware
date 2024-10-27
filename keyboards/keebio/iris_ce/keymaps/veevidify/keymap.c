@@ -40,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├─────────────┼────────┼────────┼─────────────┼─────────────┼─────────────┤                          ├─────────────┼─────────────┼─────────────┼────────┼────────┼─────────┤
      LT(3,KC_ESC), KC_A,    KC_S,    LCTL_T(KC_D), LGUI_T(KC_F), LALT_T(KC_G),                            LALT_T(KC_H), LGUI_T(KC_J), LCTL_T(KC_K), KC_L,    KC_P,    KC_BSPC,
   //├─────────────┼────────┼────────┼─────────────┼─────────────┼─────────────┼────────┐        ┌────────┼─────────────┼─────────────┼─────────────┼────────┼────────┼─────────┤
-     KC_LSFT,      KC_Z,    KC_X,    KC_C,         KC_V,         KC_B,         KC_ESC,           KC_BSPC, KC_N,         KC_M,         KC_COMM,      KC_DOT,  KC_SLSH, TO(4),
+     KC_LSFT,      KC_Z,    KC_X,    KC_C,         KC_V,         KC_B,         KC_SPC,           KC_ENT,  KC_N,         KC_M,         KC_COMM,      KC_DOT,  KC_SLSH, TO(4),
   //└─────────────┴────────┴────────┴─────────────┼────────┬────┴───┬─────────┼────────┘        └────────┼─────────┬───┴──────────┬─┴───────────┬──┴────────┴────────┴─────────┘
                                                    ALTW,    TL_LOWR, KC_SPC,                              KC_ENT,   OSM(MOD_LSFT), LT(2,KC_DEL)
                                 //                └────────┴────────┴─────────┘                          └─────────┴──────────────┴─────────────┘
@@ -107,10 +107,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     // Immediately select the hold action when another key is pressed.
-    case LT(2, KC_BSPC):
-      return true;
-    case LT(2, KC_DEL):
-      return true;
+    // case LT(2, KC_BSPC):
+    //   return true;
+    // case LT(2, KC_DEL):
+    //   return true;
     case LT(3, KC_ESC):
       return true;
     // Do not select the hold action when another key is pressed.
