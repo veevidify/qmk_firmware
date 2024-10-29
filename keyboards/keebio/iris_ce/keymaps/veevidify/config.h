@@ -5,6 +5,7 @@
 #define TAPPING_TERM 300
 
 #define RGB_MATRIX_DEFAULT_ON true
+#define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_SOLID_REACTIVE
 
  // Sets the default hue value, if none has been set
 #define RGB_MATRIX_DEFAULT_HUE 252
