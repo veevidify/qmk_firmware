@@ -245,7 +245,11 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         // key has led associated
         if (index >= led_min && index < led_max && index != NO_LED) {
           HSV hsv = l0;
-          switch (layer) {
+          // if a key is not mapped on this layer, turn it off
+          if (keymap_key_to_keycode(layer, (keypos_t){col,row}) <= KC_TRNS) {
+            hsv.v = 0;
+          } else {
+            switch (layer) {
             case 1:
               hsv = l1;
               hsv.v = rgb_matrix_get_val() + 25; // force brighter - not sure if ok
@@ -264,10 +268,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
               break;
             default:
               break;
-          }
-          // however if a key is not mapped on this layer, turn it off
-          if (keymap_key_to_keycode(layer, (keypos_t){col,row}) <= KC_TRNS) {
-            hsv.v = 0;
+            }
           }
           RGB rgb = hsv_to_rgb(hsv);
           rgb_matrix_set_color(index, rgb.r, rgb.g, rgb.b);
@@ -277,12 +278,10 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
   } else { // default layer just display all
     for (uint8_t i = led_min; i < led_max; i++) {
       if (l0.v > rgb_matrix_get_val()) {
-        l0.v = rgb_matrix_get_val(); // force brighter - not sure if ok
+        l0.v = rgb_matrix_get_val();
       }
       RGB r0 = hsv_to_rgb(l0);
-      if (HAS_FLAGS(g_led_config.flags[i], 0x01)) { // 0x01 == LED_FLAG_MODIFIER
-        rgb_matrix_set_color(i, r0.r, r0.g, r0.b);
-      }
+      rgb_matrix_set_color(i, r0.r, r0.g, r0.b);
     }
   }
   return false;
