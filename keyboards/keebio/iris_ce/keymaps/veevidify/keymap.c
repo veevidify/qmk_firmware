@@ -27,7 +27,8 @@ enum custom_keycodes {
   WORDP, // alt left (previous word)
   WORDN, // alt right (next word)
   LINEB, // cmd left (line begin)
-  LINEE  // cmd right (line end)
+  LINEE, // cmd right (line end)
+  JSFUNC // type () => {\n}<enter>
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -50,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                    ┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
                          KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                            KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-                         ALTW,    _______, _______, KC_DQUO, KC_QUOT, KC_PIPE,                            KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, _______, ZOOMI,
+                         ALTW,    _______, _______, KC_DQUO, KC_QUOT, KC_PIPE,                            KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, JSFUNC,  ZOOMI,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
                          KC_ESC,  _______, _______, KC_MINS, KC_COLN, KC_PPLS,                            KC_QUES, KC_SCLN, KC_LBRC, KC_RBRC, _______, _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -216,6 +217,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
         SEND_STRING(SS_LGUI(SS_TAP(X_RGHT)));
       }
       return false;
+    case JSFUNC: // type () => {\n}<enter>
+      if (record->event.pressed) {
+        SEND_STRING("() => {}" SS_TAP(X_LEFT) SS_TAP(X_ENT));
+      }
+      return false;
+
   }
   return true;
 }
