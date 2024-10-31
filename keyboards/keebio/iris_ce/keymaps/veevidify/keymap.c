@@ -51,9 +51,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                    ┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
                          KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                            KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-                         ALTW,    _______, _______, KC_DQUO, KC_QUOT, KC_PIPE,                            KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, JSFUNC,  ZOOMI,
+                         ALTW,    _______, _______, KC_DQUO, KC_QUOT, KC_PIPE,                            KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, JSFUNC,  ZOOMI,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-                         KC_ESC,  _______, _______, KC_MINS, KC_COLN, KC_PPLS,                            KC_QUES, KC_SCLN, KC_LBRC, KC_RBRC, _______, _______,
+                         KC_ESC,  _______, _______, KC_MINS, KC_COLN, KC_PPLS,                            KC_QUES, KC_SCLN, KC_LPRN, KC_RPRN, _______, _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
                          SCRSH,   _______, _______, KC_BSLS, KC_UNDS, KC_DEL,  FULLS,            RSNAP,   KC_BSPC, KC_TILD, KC_LT,   KC_GT,   KC_SLSH, ZOOMO,
   //                    └────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
