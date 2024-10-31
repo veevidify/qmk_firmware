@@ -14,6 +14,8 @@ enum custom_layers {
 enum custom_keycodes {
   // starting the seq from a safe range
   ALTW = SAFE_RANGE,  // switch app
+  CMDC,  // copy (cmd c)
+  CMDV,  // paste (cmd v)
   SCRSH, // macos screen shot (draw)
   ZOOMI, // cmd + (zoom in)
   ZOOMO, // cmd - (zoom out)
@@ -83,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
                          _______, _______, _______, _______, _______, _______,                            KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_PGUP, _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-                         _______, _______, _______, _______, _______, _______, LCSNP,            RCSNP,   _______, _______, KC_HOME, KC_END,  KC_PGDN, _______,
+                         _______, _______, _______, CMDC,    CMDV,    _______, LCSNP,            RCSNP,   _______, _______, KC_HOME, KC_END,  KC_PGDN, _______,
   //                    └────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                                         _______, TO(0),   _______,                   _______, TO(0),   _______
                                                     // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -142,6 +144,16 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 // macros
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   switch (keycode) {
+    case CMDC:  // copy (cmd c)
+      if (record->event.pressed) {
+        SEND_STRING(SS_LGUI(SS_TAP(X_C))); // cmd C
+      }
+      return false;
+    case CMDV:  // paste (cmd v)
+      if (record->event.pressed) {
+        SEND_STRING(SS_LGUI(SS_TAP(X_V))); // cmd V
+      }
+      return false;
     case ALTW: // switch app
       if (record->event.pressed) {
         SEND_STRING(SS_LALT(SS_TAP(X_W))); // alt W
