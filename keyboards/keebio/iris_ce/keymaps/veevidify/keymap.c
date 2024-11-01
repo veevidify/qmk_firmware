@@ -18,6 +18,7 @@ enum custom_keycodes {
   CMDV,  // paste (cmd v)
   CMDR,  // refresh (cmd r)
   CMDT,  // new tab (cmd t)
+  CMDF,  // search (cmd f)
   SCRSH, // macos screen shot (draw)
   ZOOMI, // cmd + (zoom in)
   ZOOMO, // cmd - (zoom out)
@@ -85,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
                          _______, _______, _______, _______, CMDR,    CMDT,                               LINEB,   LINEE,   WORDP,   WORDN,   _______, _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-                         _______, _______, _______, _______, _______, _______,                            KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_PGUP, _______,
+                         _______, _______, _______, _______, CMDF,    _______,                            KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_PGUP, _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
                          _______, _______, _______, CMDC,    CMDV,    _______, LCSNP,            RCSNP,   _______, _______, KC_HOME, KC_END,  KC_PGDN, _______,
   //                    └────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -164,6 +165,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     case CMDT:  // new tab (cmd t)
       if (record->event.pressed) {
         SEND_STRING(SS_LGUI(SS_TAP(X_T))); // cmd T
+      }
+      return false;
+    case CMDF:  // search (cmd t)
+      if (record->event.pressed) {
+        SEND_STRING(SS_LGUI(SS_TAP(X_F))); // cmd F
       }
       return false;
     case ALTW: // switch app
