@@ -16,6 +16,8 @@ enum custom_keycodes {
   ALTW = SAFE_RANGE,  // switch app
   CMDC,  // copy (cmd c)
   CMDV,  // paste (cmd v)
+  CMDR,  // refresh (cmd r)
+  CMDT,  // new tab (cmd t)
   SCRSH, // macos screen shot (draw)
   ZOOMI, // cmd + (zoom in)
   ZOOMO, // cmd - (zoom out)
@@ -81,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                    ┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
                          KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-                         _______, _______, _______, _______, _______, _______,                            LINEB,   LINEE,   WORDP,   WORDN,   _______, _______,
+                         _______, _______, _______, _______, CMDR,    CMDT,                               LINEB,   LINEE,   WORDP,   WORDN,   _______, _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
                          _______, _______, _______, _______, _______, _______,                            KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_PGUP, _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -152,6 +154,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     case CMDV:  // paste (cmd v)
       if (record->event.pressed) {
         SEND_STRING(SS_LGUI(SS_TAP(X_V))); // cmd V
+      }
+      return false;
+    case CMDR:  // refresh (cmd r)
+      if (record->event.pressed) {
+        SEND_STRING(SS_LGUI(SS_TAP(X_R))); // cmd R
+      }
+      return false;
+    case CMDT:  // new tab (cmd t)
+      if (record->event.pressed) {
+        SEND_STRING(SS_LGUI(SS_TAP(X_T))); // cmd T
       }
       return false;
     case ALTW: // switch app
