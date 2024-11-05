@@ -19,6 +19,7 @@ enum custom_keycodes {
   CMDR,  // refresh (cmd r)
   CMDT,  // new tab (cmd t)
   CMDF,  // search (cmd f)
+  CMDX,  // cut (cmd x)
   SCRSH, // macos screen shot (draw)
   ZOOMI, // cmd + (zoom in)
   ZOOMO, // cmd - (zoom out)
@@ -88,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
                          _______, _______, _______, _______, CMDF,    _______,                            KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_PGUP, _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-                         _______, _______, _______, CMDC,    CMDV,    _______, LCSNP,            RCSNP,   _______, _______, KC_HOME, KC_END,  KC_PGDN, _______,
+                         _______, _______, CMDX,    CMDC,    CMDV,    _______, LCSNP,            RCSNP,   _______, _______, KC_HOME, KC_END,  KC_PGDN, _______,
   //                    └────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                                         _______, TO(0),   _______,                   _______, TO(0),   _______
                                                     // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -170,6 +171,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     case CMDF:  // search (cmd t)
       if (record->event.pressed) {
         SEND_STRING(SS_LGUI(SS_TAP(X_F))); // cmd F
+      }
+      return false;
+    case CMDX:  // cut (cmd x)
+      if (record->event.pressed) {
+        SEND_STRING(SS_LGUI(SS_TAP(X_X))); // cmd X
       }
       return false;
     case ALTW: // switch app
