@@ -3,3 +3,4 @@ TRI_LAYER_ENABLE = yes
 # Bootloader selection
 BOOTLOADER = rp2040
 RGBLIGHT_ENABLE = no
+DEBOUNCE_TYPE = sym_eager_pk

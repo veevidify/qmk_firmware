@@ -24,3 +24,6 @@
 #define ONESHOT_TIMEOUT 2000
 
 #define MOUSEKEY_MAX_SPEED 5
+
+#define DEBOUNCE 20
+
