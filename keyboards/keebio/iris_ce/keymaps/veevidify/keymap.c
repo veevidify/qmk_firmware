@@ -20,6 +20,7 @@ enum custom_keycodes {
   CMDT,  // new tab (cmd t)
   CMDF,  // search (cmd f)
   CMDX,  // cut (cmd x)
+  CMDSPC,// omni search (cmd space)
   SCRSH, // macos screen shot (draw)
   ZOOMI, // cmd + (zoom in)
   ZOOMO, // cmd - (zoom out)
@@ -47,9 +48,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├─────────────┼────────┼────────┼─────────────┼─────────────┼─────────────┤                          ├─────────────┼─────────────┼─────────────┼────────┼────────┼─────────┤
      LT(3,KC_ESC), KC_A,    KC_S,    LCTL_T(KC_D), LGUI_T(KC_F), LALT_T(KC_G),                            LALT_T(KC_H), LGUI_T(KC_J), LCTL_T(KC_K), KC_L,    KC_P,    KC_BSPC,
   //├─────────────┼────────┼────────┼─────────────┼─────────────┼─────────────┼────────┐        ┌────────┼─────────────┼─────────────┼─────────────┼────────┼────────┼─────────┤
-     KC_LSFT,      KC_Z,    KC_X,    KC_C,         KC_V,         KC_B,         KC_ENT,           KC_ESC,  KC_N,         KC_M,         KC_COMM,      KC_DOT,  KC_SLSH, KC_ENT,
+     KC_LSFT,      KC_Z,    KC_X,    KC_C,         KC_V,         KC_B,         ALTW,             CMDSPC,  KC_N,         KC_M,         KC_COMM,      KC_DOT,  KC_SLSH, KC_ENT,
   //└─────────────┴────────┴────────┴─────────────┼────────┬────┴───┬─────────┼────────┘        └────────┼─────────────┼─────────────┴┬────────────┴┬───────┴────────┴─────────┘
-                                                   ALTW,    OSL(1),  KC_SPC,                              LT(2,KC_DEL), OSM(MOD_LSFT), TO(4)
+                                                   KC_ENT,  OSL(1),  KC_SPC,                              LT(2,KC_DEL), OSM(MOD_LSFT), TO(4)
                                 //                └────────┴────────┴─────────┘                          └─────────────┴──────────────┴─────────────┘
   ),
 
@@ -63,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
                          TO(0),   _______, _______, KC_PIPE, KC_UNDS, KC_DEL,  FULLS,            RSNAP,   KC_BSPC, KC_TILD, KC_LT,   KC_GT,   KC_SLSH, _______,
   //                    └────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                                        _______, _______, _______,                   _______, _______, _______
+                                                        _______, _______, _______,                   KC_SPC,  KC_ENT,  _______
                                                     // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -105,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
                          TO(0),   _______, _______, RGB_TOG, RGB_VAD, RGB_VAI, KC_ENT,           TO(0),   _______, _______, _______, _______, _______, KC_ENT,
   //                    └────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                                        TO(0),   TO(0),   _______,                   _______, _______, _______
+                                                        KC_ENT,  TO(0),   _______,                   _______, _______, _______
                                                     // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   )
 };
@@ -176,6 +177,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     case CMDX:  // cut (cmd x)
       if (record->event.pressed) {
         SEND_STRING(SS_LGUI(SS_TAP(X_X))); // cmd X
+      }
+      return false;
+    case CMDSPC:  // omni search (cmd space)
+      if (record->event.pressed) {
+        SEND_STRING(SS_LGUI(SS_TAP(X_SPC))); // cmd space
       }
       return false;
     case ALTW: // switch app
