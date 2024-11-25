@@ -99,27 +99,17 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case MT(MOD_LCTL, KC_D):
-      // Immediately select the hold action when another key is tapped.
+    case LCTL_T(KC_S):
       return true;
-    case MT(MOD_LCTL, KC_F):
-      // Immediately select the hold action when another key is tapped.
+    case LSFT_T(KC_D):
       return true;
-    case MT(MOD_LGUI, KC_F):
-      // Immediately select the hold action when another key is tapped.
+    case LT(1,KC_F):
       return true;
-    case MT(MOD_LCTL, KC_K):
-      // Immediately select the hold action when another key is tapped.
+    case LT(1,KC_J):
       return true;
-    case MT(MOD_LCTL, KC_J):
-      // Immediately select the hold action when another key is tapped.
+    case LSFT_T(KC_K):
       return true;
-    case MT(MOD_LGUI, KC_J):
-      // Immediately select the hold action when another key is tapped.
-      return true;
-    case LT(1,KC_S):
-      return true;
-    case LSFT_T(KC_L):
+    case LCTL_T(KC_L):
       return true;
     default:
       // Do not select the hold action when another key is tapped.
