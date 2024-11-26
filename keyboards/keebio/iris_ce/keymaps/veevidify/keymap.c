@@ -42,29 +42,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
   //┌─────────────┬────────┬────────────┬─────────────┬─────────────┬─────────────┐                          ┌─────────────┬──────────────┬─────────────┬──────────────┬────────┬─────────────┐
-     KC_GRV,       KC_1,    KC_2,        KC_3,         KC_4,         KC_5,                                    KC_6,         KC_7,          KC_8,         KC_9,          KC_0,    KC_VOLU,
+     KC_GRV,       KC_1,    KC_2,        KC_3,         KC_4,         KC_5,                                    KC_6,         KC_7,          KC_8,         KC_9,          KC_0,    KC_MUTE,
   //├─────────────┼────────┼────────────┼─────────────┼─────────────┼─────────────┤                          ├─────────────┼──────────────┼─────────────┼──────────────┼────────┼─────────────┤
      KC_TAB,       KC_Q,    KC_W,        KC_E,         KC_R,         KC_T,                                    KC_Y,         KC_U,          KC_I,         KC_O,          KC_BSLS, KC_BSPC,
   //├─────────────┼────────┼────────────┼─────────────┼─────────────┼─────────────┤                          ├─────────────┼──────────────┼─────────────┼──────────────┼────────┼─────────────┤
-     LT(3,KC_ESC), KC_A,    LCTL_T(KC_S),LSFT_T(KC_D), LT(1,KC_F),   LALT_T(KC_G),                            LALT_T(KC_H), LT(1,KC_J),    LSFT_T(KC_K), LCTL_T(KC_L),  KC_P,    LT(2,KC_DEL),
+     LT(3,KC_ESC), KC_A,    KC_S,        LSFT_T(KC_D), LT(1,KC_F),   LALT_T(KC_G),                            LALT_T(KC_H), LT(1,KC_J),    LSFT_T(KC_K), KC_L,          KC_P,    LT(2,KC_DEL),
   //├─────────────┼────────┼────────────┼─────────────┼─────────────┼─────────────┼────────┐        ┌────────┼─────────────┼──────────────┼─────────────┼──────────────┼────────┼─────────────┤
-     KC_LSFT,      KC_Z,    KC_X,        KC_C,         KC_V,         KC_B,         ALTW,             CMDSPC,  KC_N,         KC_M,          KC_COMM,      KC_DOT,        KC_SLSH, KC_VOLD,
+     KC_LCTL,      KC_Z,    KC_X,        KC_C,         KC_V,         KC_B,         ALTW,             CMDSPC,  KC_N,         KC_M,          KC_COMM,      KC_DOT,        KC_SLSH, KC_LSFT,
   //└─────────────┴────────┴────────────┴─────────────┼────────┬────┴───┬─────────┼────────┘        └────────┼─────────────┼──────────────┼─────────────┼──────────────┴────────┴─────────────┘
-                                                       TO(0),   KC_LGUI, KC_ENT,                              KC_SPC,       OSM(MOD_LSFT), TO(4)
+                                                       TO(0),   KC_LGUI, KC_SPC,                              KC_ENT,       OSL(1),        TO(4)
                                 //                    └────────┴────────┴─────────┘                          └─────────────┴──────────────┴─────────────┘
   ),
 
   [_LOWER] = LAYOUT(
   //                    ┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-                         KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                            KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, ZOOMI,
+                         KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                            KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-                         SCRSH,   _______, KC_QUES, KC_DQUO, KC_QUOT, _______,                            KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, JSFUNC,  _______,
+                         SCRSH,   _______, KC_QUES, KC_DQUO, KC_QUOT, _______,                            KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, JSFUNC,  ZOOMI,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-                         KC_ESC,  _______, _______, KC_PIPE, KC_COLN, KC_PPLS,                            KC_EQL,  KC_SCLN, KC_LPRN, KC_RPRN, _______, _______,
+                         KC_ESC,  _______, _______, KC_PIPE, KC_COLN, KC_PPLS,                            KC_EQL,  KC_SCLN, KC_LPRN, KC_RPRN, _______, ZOOMO,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-                         TO(0),   _______, _______, _______, KC_TILD, KC_DEL,  FULLS,            RSNAP,   KC_UNDS, KC_MINS, KC_LT,   KC_GT,   KC_SLSH, ZOOMO,
+                         _______, _______, _______, _______, KC_TILD, KC_DEL,  FULLS,            RSNAP,   KC_UNDS, KC_MINS, KC_LT,   KC_GT,   KC_SLSH, _______,
   //                    └────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                                        _______, _______, _______,                   KC_SPC,  _______, _______
+                                                        _______, _______, _______,                   _______, _______, _______
                                                     // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -104,9 +104,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
                          _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-                         TO(0),   _______, _______, RGB_TOG, RGB_VAD, RGB_VAI, KC_ENT,           TO(0),   _______, _______, _______, _______, _______, _______,
+                         _______, _______, _______, RGB_TOG, RGB_VAD, RGB_VAI, KC_ENT,           TO(0),   _______, _______, _______, _______, _______, _______,
   //                    └────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                                        TO(0),   _______, KC_ENT,                    _______, _______,  _______
+                                                        TO(0),   _______, _______,                   KC_ENT,  _______, _______
                                                     // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   )
 };
@@ -131,8 +131,6 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     // Immediately select the hold action when another key is tapped.
-    case LCTL_T(KC_S):
-      return true;
     case LSFT_T(KC_D):
       return true;
     case LT(1,KC_F):
@@ -140,8 +138,6 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     case LT(1,KC_J):
       return true;
     case LSFT_T(KC_K):
-      return true;
-    case LCTL_T(KC_L):
       return true;
 
     // Do not select the hold action when another key is tapped.
