@@ -60,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
                          SCRSH,   KC_EXLM, KC_QUES, KC_DQUO, KC_QUOT, KC_CIRC,                            KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, KC_PIPE, ZOOMI,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-                         KC_ESC,  KC_AT,   KC_PPLS, KC_GRV,  KC_COLN, KC_AMPR,                            KC_EQL,  KC_SCLN, KC_LPRN, KC_RPRN, _______, _______,
+                         KC_ESC,  KC_AT,   KC_PPLS, KC_GRV,  KC_SCLN, KC_AMPR,                            KC_EQL,  KC_COLN, KC_LPRN, KC_RPRN, _______, _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
                          _______, KC_HASH, KC_DLR,  KC_PERC, KC_TILD, KC_ASTR, FULLS,            RSNAP,   KC_UNDS, KC_MINS, KC_LT,   KC_GT,   KC_SLSH, ZOOMO,
   //                    └────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
