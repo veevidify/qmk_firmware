@@ -38,6 +38,12 @@ enum custom_keycodes {
   JSFUNC // type () => {\n}<enter>
 };
 
+// combo keys
+const uint16_t PROGMEM m_lt_gt[] = {KC_M, KC_COMM, KC_DOT, COMBO_END};
+combo_t key_combos[] = {
+    COMBO(m_lt_gt, KC_ENT),
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
