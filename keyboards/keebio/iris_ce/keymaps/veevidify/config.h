@@ -25,4 +25,4 @@
 #define RGBLIGHT_SPLIT
 #define SPLIT_MODS_ENABLE
 
-#define COMBO_TERM 50
+#define COMBO_TERM 100
