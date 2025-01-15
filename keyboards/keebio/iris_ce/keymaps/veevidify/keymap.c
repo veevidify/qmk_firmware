@@ -50,9 +50,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌─────────────┬────────┬────────────┬─────────────┬─────────────┬─────────────┐                          ┌─────────────┬──────────────┬─────────────┬──────────────┬────────┬─────────────┐
      KC_F12,       KC_1,    KC_2,        KC_3,         KC_4,         KC_5,                                    KC_6,         KC_7,          KC_8,         KC_9,          KC_0,    KC_MUTE,
   //├─────────────┼────────┼────────────┼─────────────┼─────────────┼─────────────┤                          ├─────────────┼──────────────┼─────────────┼──────────────┼────────┼─────────────┤
-     KC_TAB,       KC_Q,    KC_W,        KC_E,         KC_R,         KC_T,                                    KC_Y,         KC_U,          KC_I,         KC_O,          KC_SCLN, KC_GRV,
+     KC_TAB,       KC_Q,    KC_W,        KC_E,         KC_R,         KC_T,                                    KC_Y,         KC_U,          KC_I,         KC_O,          KC_BSPC, KC_GRV,
   //├─────────────┼────────┼────────────┼─────────────┼─────────────┼─────────────┤                          ├─────────────┼──────────────┼─────────────┼──────────────┼────────┼─────────────┤
-     LT(3,KC_ESC), KC_A,    KC_S,        LCTL_T(KC_D), LT(1,KC_F),   LALT_T(KC_G),                            LALT_T(KC_H), LT(1,KC_J),    LCTL_T(KC_K), KC_L,          KC_P,    KC_BSPC,
+     LT(3,KC_ESC), KC_A,    KC_S,        LCTL_T(KC_D), LT(1,KC_F),   LALT_T(KC_G),                            LALT_T(KC_H), LT(1,KC_J),    LCTL_T(KC_K), KC_L,          KC_P,    KC_SCLN,
   //├─────────────┼────────┼────────────┼─────────────┼─────────────┼─────────────┼────────┐        ┌────────┼─────────────┼──────────────┼─────────────┼──────────────┼────────┼─────────────┤
      KC_LSFT,      KC_Z,    KC_X,        KC_C,         KC_V,         KC_B,         ALTW,             CMDSPC,  KC_N,         KC_M,          KC_COMM,      KC_DOT,        KC_SLSH, OSM(MOD_LSFT),
   //└─────────────┴────────┴────────────┴─────────────┼─────────────┼─────────────┼────────┘        └────────┼─────────────┼──────────────┼─────────────┼──────────────┴────────┴─────────────┘
@@ -62,13 +62,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT(
   //                    ┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-                         KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                            KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
+                         _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                            KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-                         SCRSH,   KC_EXLM, KC_QUES, KC_DQUO, KC_QUOT, KC_CIRC,                            KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, KC_COLN, KC_TILD,
+                         SCRSH,   KC_EXLM, KC_QUES, KC_DQUO, KC_QUOT, KC_CIRC,                            KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, ZOOMI,   KC_TILD,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-                         KC_ESC,  KC_AT,   KC_PPLS, KC_PIPE, KC_COLN, KC_AMPR,                            KC_EQL,  KC_COLN, KC_LPRN, KC_RPRN, _______, ZOOMI,
+                         KC_ESC,  KC_AT,   KC_PPLS, KC_PIPE, KC_COLN, KC_AMPR,                            KC_EQL,  KC_COLN, KC_LPRN, KC_RPRN, ZOOMO,   KC_COLN,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-                         _______, KC_HASH, KC_DLR,  KC_PERC, KC_UNDS, KC_ASTR, FULLS,            RSNAP,   KC_BSLS, KC_MINS, KC_LT,   KC_GT,   KC_SLSH, ZOOMO,
+                         _______, KC_HASH, KC_DLR,  KC_PERC, KC_UNDS, KC_ASTR, FULLS,            RSNAP,   KC_BSLS, KC_MINS, KC_LT,   KC_GT,   KC_SLSH, _______,
   //                    └────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                                         _______, _______, _______,                   KC_ENT,  _______, _______
                                                     // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
