@@ -52,11 +52,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├─────────────┼────────┼────────────┼─────────────┼─────────────┼─────────────┤                          ├─────────────┼──────────────┼─────────────┼──────────────┼────────┼─────────────┤
      KC_TAB,       KC_Q,    KC_W,        KC_E,         KC_R,         KC_T,                                    KC_Y,         KC_U,          KC_I,         KC_O,          KC_BSPC, KC_GRV,
   //├─────────────┼────────┼────────────┼─────────────┼─────────────┼─────────────┤                          ├─────────────┼──────────────┼─────────────┼──────────────┼────────┼─────────────┤
-     LT(3,KC_ESC), KC_A,    KC_S,        LCTL_T(KC_D), LT(1,KC_F),   LALT_T(KC_G),                            LALT_T(KC_H), LT(1,KC_J),    LCTL_T(KC_K), KC_L,          KC_P,    KC_SCLN,
+     LT(3,KC_ESC), KC_A,    KC_S,        LCTL_T(KC_D), LT(2,KC_F),   LALT_T(KC_G),                            LALT_T(KC_H), LT(2,KC_J),    LCTL_T(KC_K), KC_L,          KC_P,    KC_SCLN,
   //├─────────────┼────────┼────────────┼─────────────┼─────────────┼─────────────┼────────┐        ┌────────┼─────────────┼──────────────┼─────────────┼──────────────┼────────┼─────────────┤
      KC_LSFT,      KC_Z,    KC_X,        KC_C,         KC_V,         KC_B,         ALTW,             CMDSPC,  KC_N,         KC_M,          KC_COMM,      KC_DOT,        KC_SLSH, OSM(MOD_LSFT),
   //└─────────────┴────────┴────────────┴─────────────┼─────────────┼─────────────┼────────┘        └────────┼─────────────┼──────────────┼─────────────┼──────────────┴────────┴─────────────┘
-                                         LT(2,KC_DEL), KC_LGUI,      KC_SPC,                                  KC_ENT,       TO(2),         TO(4)
+                                         LT(2,KC_DEL), MO(1),        KC_SPC,                                  KC_ENT,       MO(1),         TO(4)
                                 //      └─────────────┴─────────────┴─────────────┘                          └─────────────┴──────────────┴─────────────┘
   ),
 
@@ -64,11 +64,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                    ┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
                          _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                            KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-                         SCRSH,   KC_EXLM, KC_QUES, KC_DQUO, KC_QUOT, KC_CIRC,                            KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, ZOOMI,   KC_TILD,
+                         SCRSH,   KC_EXLM, KC_QUES, KC_DQUO, KC_QUOT, KC_CIRC,                            KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, _______, KC_TILD,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-                         KC_ESC,  KC_AT,   KC_PPLS, KC_PIPE, KC_COLN, KC_AMPR,                            KC_EQL,  KC_COLN, KC_LPRN, KC_RPRN, ZOOMO,   KC_COLN,
+                         ZOOMI,   KC_AT,   KC_PPLS, KC_PIPE, KC_COLN, KC_AMPR,                            KC_EQL,  KC_COLN, KC_LPRN, KC_RPRN, _______, KC_COLN,
   //                    ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-                         _______, KC_HASH, KC_DLR,  KC_PERC, KC_UNDS, KC_ASTR, FULLS,            RSNAP,   KC_BSLS, KC_MINS, KC_LT,   KC_GT,   KC_SLSH, _______,
+                         ZOOMO,   KC_HASH, KC_DLR,  KC_PERC, KC_UNDS, KC_ASTR, FULLS,            RSNAP,   KC_BSLS, KC_MINS, KC_LT,   KC_GT,   KC_SLSH, _______,
   //                    └────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                                         _______, _______, _______,                   KC_ENT,  _______, _______
                                                     // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -136,6 +136,11 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     case LT(1,KC_F):
       return true;
     case LT(1,KC_J):
+      return true;
+
+    case LT(2,KC_F):
+      return true;
+    case LT(2,KC_J):
       return true;
 
     // Do not select the hold action when another key is tapped.
